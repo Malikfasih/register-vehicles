@@ -1,10 +1,15 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from "./Spinner";
-import { deleteRegVehicle } from "../redux/features/vehicleSlice";
+import {
+  deleteRegVehicle,
+  getAllRegVehicles,
+} from "../redux/features/vehicleSlice";
 
 const Table = ({ setCurrentId, setOpenModal }) => {
-  const { registeredVehicles, loading } = useSelector((state) => state.vehicle);
+  const { registeredVehicles, loading, currentPage } = useSelector(
+    (state) => state.vehicle
+  );
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.result?._id;
   const dispatch = useDispatch();
@@ -21,6 +26,7 @@ const Table = ({ setCurrentId, setOpenModal }) => {
       window.confirm("Are you sure you want to delete this vehicle details ?")
     ) {
       dispatch(deleteRegVehicle({ id }));
+      dispatch(getAllRegVehicles(currentPage));
     }
   };
 
@@ -42,13 +48,15 @@ const Table = ({ setCurrentId, setOpenModal }) => {
                 Category
               </th>
               <th scope="col" className="px-6 py-3">
-                Color
+                Model
               </th>
+
               <th scope="col" className="px-6 py-3">
                 Registration No
               </th>
+
               <th scope="col" className="px-6 py-3">
-                Model
+                Color
               </th>
               <th scope="col" className="px-6 py-3">
                 Made By
