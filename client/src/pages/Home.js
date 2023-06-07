@@ -23,7 +23,10 @@ const Home = () => {
       <Navbar />
       <div className="container mx-auto">
         <div className="flex justify-end my-6 mr-4">
-          <ModalButton setOpenModal={setOpenModal} />
+          <ModalButton
+            setOpenModal={setOpenModal}
+            setCurrentId={setCurrentId}
+          />
         </div>
         <Modal
           openModal={openModal}

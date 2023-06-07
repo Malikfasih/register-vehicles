@@ -13,7 +13,8 @@ function App() {
         <Route
           path="/auth"
           exact
-          element={!user ? <Auth /> : <Navigate replace to="/" />}
+          // element={!user?.result ? <Auth /> : <Home />}
+          element={<Auth />}
         />
       </Routes>
     </BrowserRouter>

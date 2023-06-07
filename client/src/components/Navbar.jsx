@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation, redirect } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../redux/features/authSlice";
 import decode from "jwt-decode";
@@ -8,23 +8,28 @@ const Navbar = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   // check if the token is expired then logout the user
   useEffect(() => {
     const token = user?.token;
+    // console.log("token", token);
 
     if (token) {
       const decodedToken = decode(token);
 
-      if (decodedToken.exp * 1000 < new Date().getTime()) setLogout();
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        alert("session expired");
+        setLogout();
+        navigate("/");
+      }
     }
-  }, [location]);
+  }, []);
 
   // button redirects to authentication
   const handleAuthButton = () => {
     if (user?.result) {
       dispatch(setLogout());
+      navigate("/auth");
     }
     navigate("/auth");
   };

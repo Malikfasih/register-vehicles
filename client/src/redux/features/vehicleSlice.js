@@ -5,7 +5,6 @@ import * as api from "../services/api";
 export const registerVehicle = createAsyncThunk(
   "vehicle/registerVehicle",
   async ({ vehicleData }) => {
-    console.log("registerVehicle", vehicleData);
     try {
       const response = await api.registerVehicle(vehicleData);
       return response.data;
@@ -21,7 +20,6 @@ export const getAllRegVehicles = createAsyncThunk(
   async (page) => {
     try {
       const response = await api.getAllRegVehicles(page);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -33,10 +31,8 @@ export const getAllRegVehicles = createAsyncThunk(
 export const deleteRegVehicle = createAsyncThunk(
   "vehicle/deleteRegVehicle",
   async ({ id }) => {
-    console.log("logs id from delete action", id);
     try {
       const response = await api.deleteRegVehicle(id);
-      console.log("logs response", response.data);
 
       return response.data;
     } catch (error) {
@@ -50,12 +46,9 @@ export const updateRegVehicle = createAsyncThunk(
   "vehicle/updateRegVehicle",
   async ({ vehicleData }) => {
     const { _id: id } = vehicleData;
-    console.log("this updated vehicle data", vehicleData);
-    console.log("this updated id", id);
 
     try {
       const response = await api.updateRegVehicle(id, vehicleData);
-      console.log("response data of update", response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -83,7 +76,7 @@ const vehicleSlice = createSlice({
     },
     [registerVehicle.fulfilled]: (state, action) => {
       state.loading = false;
-      state.registeredVehicles = [...state, action.payload];
+      state.registeredVehicles = [...state.registeredVehicles, action.payload];
     },
     [registerVehicle.rejected]: (state, action) => {
       state.loading = false;

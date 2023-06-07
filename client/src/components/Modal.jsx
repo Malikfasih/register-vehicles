@@ -42,13 +42,13 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
 
     if (currentId !== 0) {
       dispatch(updateRegVehicle({ currentId, vehicleData }));
+      setCurrentId(0);
     } else {
       dispatch(registerVehicle({ vehicleData }));
     }
-    setCurrentId(0);
+    dispatch(getAllRegVehicles(currentPage));
     setOpenModal(false);
     setVehicleData(initialState);
-    dispatch(getAllRegVehicles(currentPage));
   };
 
   return (
@@ -69,7 +69,10 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
               type="button"
               className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
               data-modal-hide="registeration-modal"
-              onClick={() => setOpenModal(false)}
+              onClick={() => {
+                setVehicleData(initialState);
+                setOpenModal(false);
+              }}
             >
               <svg
                 aria-hidden="true"
@@ -105,7 +108,9 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Your email"
-                    defaultValue={currentId ? user?.result?.email : ""}
+                    defaultValue={
+                      currentId ? user?.result?.email : vehicleData.email
+                    }
                     required
                     onChange={(e) =>
                       setVehicleData({
@@ -117,7 +122,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                 </div>
 
                 <div>
-                  <label htmlFor="underline_select" className="sr-only">
+                  <label htmlFor="underline_select" className="">
                     Select Vehicle Type
                   </label>
                   <select
@@ -131,7 +136,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     }
                   >
                     <option defaultValue>
-                      {currentId ? vehicle.vehicleType : "Vehicle Type"}
+                      {currentId ? vehicle.vehicleType : ""}
                     </option>
                     <option>Bus</option>
                     <option>Car</option>
@@ -151,7 +156,9 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="vehicleName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Vehicle name"
-                    defaultValue={currentId ? vehicle.vehicleName : ""}
+                    defaultValue={
+                      currentId ? vehicle.vehicleName : vehicleData.name
+                    }
                     onChange={(e) =>
                       setVehicleData({
                         ...vehicleData,
@@ -173,7 +180,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="model"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="model"
-                    defaultValue={currentId ? vehicle.model : ""}
+                    defaultValue={currentId ? vehicle.model : vehicleData.model}
                     onChange={(e) =>
                       setVehicleData({
                         ...vehicleData,
@@ -195,7 +202,11 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="registrationNo"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="registration no"
-                    defaultValue={currentId ? vehicle.registrationNo : ""}
+                    defaultValue={
+                      currentId
+                        ? vehicle.registrationNo
+                        : vehicleData.registrationNo
+                    }
                     onChange={(e) =>
                       setVehicleData({
                         ...vehicleData,
@@ -217,7 +228,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="color"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="color"
-                    defaultValue={currentId ? vehicle.color : ""}
+                    defaultValue={currentId ? vehicle.color : vehicleData.color}
                     onChange={(e) =>
                       setVehicleData({
                         ...vehicleData,
@@ -239,7 +250,9 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="madeBy"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="company name"
-                    defaultValue={currentId ? vehicle.madeBy : ""}
+                    defaultValue={
+                      currentId ? vehicle.madeBy : vehicleData.madeBy
+                    }
                     onChange={(e) =>
                       setVehicleData({
                         ...vehicleData,

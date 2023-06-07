@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signIn, signUp } from "../redux/features/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -10,7 +10,8 @@ const Auth = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const user = JSON.parse(localStorage.getItem("user"));
+  // const user = JSON.parse(localStorage.getItem("user"));
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ const Auth = () => {
   // declare variable for form data
   const signUpData = { firstName, lastName, email, genPassword };
   const signInData = { email, password };
+  console.log("user result", user?.result);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,11 +37,7 @@ const Auth = () => {
       dispatch(signUp(signUpData));
     } else {
       dispatch(signIn(signInData));
-    }
-
-    // sucessfull signUp/signIn
-    if (user?.result) {
-      navigate("/");
+      setTimeout(() => navigate("/"), 1000);
     }
 
     setFirstName("");

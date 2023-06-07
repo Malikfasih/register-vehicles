@@ -33,6 +33,7 @@ const authSlice = createSlice({
     user: null,
     error: "",
     userToken: null,
+    loading: false,
   },
   reducers: {
     setUser: (state, action) => {
@@ -50,7 +51,7 @@ const authSlice = createSlice({
     [signIn.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.user = payload;
-      state.userToken = payload.userToken;
+      // state.userToken = payload.userToken;
     },
     [signIn.rejected]: (state) => {
       state.loading = false;
