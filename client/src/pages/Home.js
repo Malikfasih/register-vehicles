@@ -12,6 +12,7 @@ const Home = () => {
   const [currentId, setCurrentId] = useState(0);
   const { currentPage } = useSelector((state) => state.vehicle);
   const dispatch = useDispatch();
+  console.log("current id in home", currentId);
 
   // fetch Registered vehicles
   useEffect(() => {

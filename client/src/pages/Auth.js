@@ -35,6 +35,7 @@ const Auth = () => {
     e.preventDefault();
     if (isSignUp) {
       dispatch(signUp(signUpData));
+      navigate("/auth");
     } else {
       dispatch(signIn(signInData));
       setTimeout(() => navigate("/"), 1000);

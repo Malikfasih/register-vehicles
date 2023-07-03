@@ -42,11 +42,11 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
 
     if (currentId !== 0) {
       dispatch(updateRegVehicle({ currentId, vehicleData }));
-      setCurrentId(0);
     } else {
       dispatch(registerVehicle({ vehicleData }));
     }
     dispatch(getAllRegVehicles(currentPage));
+    setCurrentId(0);
     setOpenModal(false);
     setVehicleData(initialState);
   };
