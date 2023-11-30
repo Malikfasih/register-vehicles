@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../redux/features/authSlice";
 import decode from "jwt-decode";
@@ -12,18 +12,17 @@ const Navbar = () => {
   // check if the token is expired then logout the user
   useEffect(() => {
     const token = user?.token;
-    // console.log("token", token);
 
     if (token) {
       const decodedToken = decode(token);
 
       if (decodedToken.exp * 1000 < new Date().getTime()) {
-        alert("session expired");
-        setLogout();
-        navigate("/");
+        // alert("Session expired");
+        dispatch(setLogout());
+        navigate("/auth");
       }
     }
-  }, []);
+  }, [dispatch, navigate, user?.token]);
 
   // button redirects to authentication
   const handleAuthButton = () => {

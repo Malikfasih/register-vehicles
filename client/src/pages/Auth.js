@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn, signUp } from "../redux/features/authSlice";
 import { useNavigate, Link } from "react-router-dom";
@@ -29,16 +29,14 @@ const Auth = () => {
   // declare variable for form data
   const signUpData = { firstName, lastName, email, genPassword };
   const signInData = { email, password };
-  console.log("user result", user?.result);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSignUp) {
       dispatch(signUp(signUpData));
-      navigate("/auth");
     } else {
       dispatch(signIn(signInData));
-      setTimeout(() => navigate("/"), 1000);
+      // setTimeout(() => navigate("/"), 1000);
     }
 
     setFirstName("");
@@ -47,6 +45,12 @@ const Auth = () => {
     setPassword("");
     setGenPassword("*******");
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">

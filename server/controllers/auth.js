@@ -27,7 +27,7 @@ export const signup = async (req, res) => {
     if (error) {
       console.log(error);
     } else {
-      console.log("Email sent: " + info.response);
+      console.log("Email sent:" + info.response);
     }
   });
 

@@ -64,46 +64,44 @@ const Table = ({ setCurrentId, setOpenModal }) => {
             </tr>
           </thead>
           <tbody>
-            {registeredVehicles?.map((vehicle, _id) => (
-              <>
-                <tr
-                  key={vehicle?._id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+            {registeredVehicles?.map((vehicle) => (
+              <tr
+                key={vehicle?._id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              >
+                <td
+                  scope="row"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  <td
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {vehicle?.vehicleName}
-                  </td>
-                  <td className="px-6 py-4">{vehicle?.vehicleType}</td>
+                  {vehicle?.vehicleName}
+                </td>
+                <td className="px-6 py-4">{vehicle?.vehicleType}</td>
 
-                  <td className="px-6 py-4">{vehicle?.model}</td>
-                  <td className="px-6 py-4">{vehicle?.registrationNo}</td>
-                  <td className="px-6 py-4">{vehicle?.color}</td>
-                  <td className="px-6 py-4">{vehicle?.madeBy}</td>
-                  <td className="px-6 py-4 ">
-                    {userId === vehicle?.creator && (
-                      <div className="flex justify-between">
-                        <button
-                          type="button"
-                          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          onClick={() => EditVehicleData(vehicle?._id)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="button"
-                          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          onClick={() => DeleteVehicleData(vehicle?._id)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
-                  </td>
-                </tr>
-              </>
+                <td className="px-6 py-4">{vehicle?.model}</td>
+                <td className="px-6 py-4">{vehicle?.registrationNo}</td>
+                <td className="px-6 py-4">{vehicle?.color}</td>
+                <td className="px-6 py-4">{vehicle?.madeBy}</td>
+                <td className="px-6 py-4 ">
+                  {userId === vehicle?.creator && (
+                    <div className="flex justify-between">
+                      <button
+                        type="button"
+                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        onClick={() => EditVehicleData(vehicle?._id)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        type="button"
+                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        onClick={() => DeleteVehicleData(vehicle?._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>

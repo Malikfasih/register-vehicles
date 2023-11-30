@@ -33,7 +33,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
 
   // updating vehicle that is targeted
   useEffect(() => {
-    if (vehicle) setVehicleData({ ...vehicle });
+    if (vehicle) setVehicleData(vehicle);
   }, [vehicle]);
 
   // performing update and create operation
@@ -108,9 +108,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Your email"
-                    defaultValue={
-                      currentId ? user?.result?.email : vehicleData.email
-                    }
+                    value={user?.result?.email}
                     required
                     onChange={(e) =>
                       setVehicleData({
@@ -135,8 +133,9 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                       })
                     }
                   >
-                    <option defaultValue>
-                      {currentId ? vehicle.vehicleType : ""}
+                    <option value>
+                      {/* {currentId ? vehicle.vehicleType : ""} */}
+                      {vehicleData.vehicleType || ""}
                     </option>
                     <option>Bus</option>
                     <option>Car</option>
@@ -156,9 +155,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="vehicleName"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Vehicle name"
-                    defaultValue={
-                      currentId ? vehicle.vehicleName : vehicleData.name
-                    }
+                    value={vehicleData.vehicleName || ""}
                     onChange={(e) =>
                       setVehicleData({
                         ...vehicleData,
@@ -180,7 +177,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="model"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="model"
-                    defaultValue={currentId ? vehicle.model : vehicleData.model}
+                    value={vehicleData.model || ""}
                     onChange={(e) =>
                       setVehicleData({
                         ...vehicleData,
@@ -202,11 +199,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="registrationNo"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="registration no"
-                    defaultValue={
-                      currentId
-                        ? vehicle.registrationNo
-                        : vehicleData.registrationNo
-                    }
+                    value={vehicleData.registrationNo || ""}
                     onChange={(e) =>
                       setVehicleData({
                         ...vehicleData,
@@ -228,7 +221,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="color"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="color"
-                    defaultValue={currentId ? vehicle.color : vehicleData.color}
+                    value={vehicleData.color || ""}
                     onChange={(e) =>
                       setVehicleData({
                         ...vehicleData,
@@ -250,9 +243,7 @@ const Modal = ({ openModal, setOpenModal, currentId, setCurrentId }) => {
                     name="madeBy"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="company name"
-                    defaultValue={
-                      currentId ? vehicle.madeBy : vehicleData.madeBy
-                    }
+                    value={vehicleData.madeBy || ""}
                     onChange={(e) =>
                       setVehicleData({
                         ...vehicleData,
